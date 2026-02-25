@@ -1,35 +1,38 @@
-import { useNavigate } from "react-router-dom";
-// import './Login.css';
+import { useNavigate } from "react-router-dom"
+import "./signup.css";
 
-export default function Login() {
+export default function Signup() {
     const navigate = useNavigate();
 
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">
-                        test
+        <div className="flex items-center justify-center min-h-screen bg-base-200">
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card-body">
+                <fieldset className="fieldset">
+                    <h1 className="text-4xl font-bold text-center text-white">Sign Up</h1>
+                    <label className="label">Email</label>
+                    <input type="email" className="input" placeholder="Email" />
+                    <label className="label">New Password</label>
+                    <input type="password" className="input" placeholder="Password" />
+                    <label className="label">Confirm Password</label>
+                    <input type="password" className="input" placeholder="Confirm Password" />
+                    <button 
+                        className="btn btn-neutral mt-4"
+                        onClick={ () => navigate("/dashboard")}
+                    >
+                    Sign Up
+                    </button>
+                    <p className="text-center mt-2">
+                         Already have an account?{" "}
+                        <a
+                            className="text-primary hover:underline cursor-pointer"
+                            onClick={() => navigate("/login")}
+                        >
+                        Login
+                        </a>
                     </p>
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <div className="card-body">
-                        <fieldset className="fieldset">
-                            <label className="label">Email</label>
-                            <input type="email" className="input" placeholder="Email" />
-                            <label className="label">Password</label>
-                            <input type="password" className="input" placeholder="Password" />
-                            <div><a className="link link-hover">Forgot password?</a></div>
-                            <button 
-                                className="btn btn-neutral mt-4"
-                                onClick={ () => navigate("/dashboard")}
-                            >
-                            Login
-                            </button>
-                        </fieldset>
-                    </div>
-                </div>
+                </fieldset>
+            </div>
             </div>
         </div>
     );

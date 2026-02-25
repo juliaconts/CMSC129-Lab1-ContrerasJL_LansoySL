@@ -3,28 +3,6 @@
   themes: elekcoded;
 }
 
-.btn {
-  border-radius: 8px;
-  font-weight: 500;
-  border: 1px solid var(--neutral);
-  background-color: var(--base-100);
-}
-
-.card-body {
-  height: 350px;
-  background-color: var(--secondary);
-  border-radius: 8px;
-}
-
-.input {
-  background-color: var(--base-100);
-  border-radius: 8px;
-}
-
-.h1 {
-  color: var(--neutral);
-}
-
 :root {
   --primary: #4070f4;
   --secondary: #f34700;
