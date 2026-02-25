@@ -1,0 +1,5 @@
+node_modules/
+dist/
+serviceAccountkey.json
+.vscode/
+.env

@@ -1,11 +1,5 @@
 import { Router, Request, Response } from "express";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { FieldValue } from "firebase-admin/firestore";
 import { db } from "../firebase";
 
 const router = Router();
@@ -30,12 +24,12 @@ router.post("/", async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Type must be "lost" or "found".' });
   }
 
-  const docRef = await addDoc(collection(db, "posts"), {
+  const docRef = await db.collection("posts").add({
     title:       title.trim(),
     description: description.trim(),
     type,
     location:    location.trim(),
-    createdAt:   serverTimestamp(),
+    createdAt:   FieldValue.serverTimestamp(),
   });
 
   return res.status(201).json({ message: "Post created.", id: docRef.id });
@@ -47,7 +41,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
 
   if (!id?.trim()) return res.status(400).json({ error: "Post ID is required." });
 
-  await deleteDoc(doc(db, "posts", id));
+  await db.collection("posts").doc(id).delete();
 
   return res.status(200).json({ message: "Post deleted.", id });
 });

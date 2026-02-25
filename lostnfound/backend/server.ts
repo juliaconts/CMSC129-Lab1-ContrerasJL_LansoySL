@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import postsRouter from "./routes/posts";
+import authRouter from "./routes/auth";
 
 dotenv.config();
 
@@ -11,10 +12,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use("/posts", postsRouter);
+app.use("/auth", authRouter);
 
-// Health check
 app.get("/", (req, res) => {
   res.send("Lost & Found API is running.");
 });
