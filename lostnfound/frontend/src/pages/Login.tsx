@@ -23,7 +23,7 @@ export default function Login() {
             <div className="mt-2">
               <button
                 className="btn btn-primary w-full"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/homepage")}
               >
                 Login
               </button>

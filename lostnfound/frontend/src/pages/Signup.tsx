@@ -23,7 +23,7 @@ export default function Signup() {
                 body: JSON.stringify({ email, password }),
             });
             if (response.ok) {
-                navigate("/dashboard");
+                navigate("/homepage");
             } else {
                 const data = await response.json();
                 console.log("Signup error:", data);
