@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: elekcoded;
+}
+
+:root {
+  --primary: #4070f4;
+  --secondary: #f34700;
+  --rounded-btn: 0.5rem;
+  --animation-btn: 0.25s;
+}
+
+[data-theme="elekcoded"] {
+  --primary: #4070f4;
+  --secondary: #f34700;
+  --accent: #37cdbe;
+  --neutral: #3d4451;
+  --base-100: #ffffff;
+}
