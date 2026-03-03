@@ -10,7 +10,7 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="drawer">
       
-      {/* Toggle Checkbox */}
+      {/* Toggle Checkbox */} 
       <input id="main-drawer" type="checkbox" className="drawer-toggle" />
 
       {/* MAIN CONTENT (Navbar lives here) */}

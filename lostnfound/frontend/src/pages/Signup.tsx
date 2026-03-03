@@ -66,7 +66,7 @@ export default function Signup() {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <button 
-                        className="btn btn-neutral mt-4"
+                        className="btn bg-black text-white border-none rounded-lg w-full text-[15px] mt-4"
                         onClick={handleSignup}
                     >
                     Sign Up

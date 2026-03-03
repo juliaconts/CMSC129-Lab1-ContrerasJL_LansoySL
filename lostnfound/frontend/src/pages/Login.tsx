@@ -22,7 +22,7 @@ export default function Login() {
             <input type="password" placeholder="Password" className="input input-bordered" />
             <div className="mt-2">
               <button
-                className="btn btn-primary w-full"
+                className="btn bg-black text-white border-none rounded-lg w-full text-[15px]"
                 onClick={() => navigate("/homepage")}
               >
                 Login

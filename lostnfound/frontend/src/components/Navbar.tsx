@@ -8,7 +8,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
     return (
         <>
-            <div className="navbar bg-black text-white shadow-sm px-4 relative">
+            <div className="navbar bg-black text-white px-4 relative">
 
                 {/* LEFT: Hamburger */}
                 <div className="flex-none">

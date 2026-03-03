@@ -11,15 +11,17 @@ export interface NewPost {
   description: string;
   type: PostType;
   location: string;
+  returnClaimLocation: string;
 }
 
 // POST /posts — Add a new post
 router.post("/", async (req: Request, res: Response) => {
-  const { title, description, type, location } = req.body as NewPost;
+  const { title, description, type, location, returnClaimLocation } = req.body as NewPost;
 
   if (!title?.trim())       return res.status(400).json({ error: "Title is required." });
   if (!description?.trim()) return res.status(400).json({ error: "Description is required." });
   if (!location?.trim())    return res.status(400).json({ error: "Location is required." });
+  if (!returnClaimLocation?.trim()) return res.status(400).json({ error: "Return/Claim Location is required." });
   if (!["lost", "found"].includes(type)) {
     return res.status(400).json({ error: 'Type must be "lost" or "found".' });
   }
@@ -29,6 +31,7 @@ router.post("/", async (req: Request, res: Response) => {
     description: description.trim(),
     type,
     location:    location.trim(),
+    returnClaimLocation: returnClaimLocation.trim(),
     createdAt:   FieldValue.serverTimestamp(),
   });
 

@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-.btn {
+/* .btn {
   border-radius: 8px;
   font-weight: 500;
   border: 1px solid var(--neutral);
   background-color: var(--base-100);
-}
+} */
 
 .card-body {
   height: 350px;
