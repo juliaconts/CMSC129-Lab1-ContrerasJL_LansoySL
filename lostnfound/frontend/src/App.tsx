@@ -4,7 +4,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Homepage from "./pages/Homepage";
-import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import DrawerLayout from "./components/DrawerLayout";
 
 const App: React.FC = () => {
   return (
@@ -17,10 +19,23 @@ const App: React.FC = () => {
     <Route path="*" element={<Navigate to="/" replace />} />
 
     <Route path="/homepage" element={
-      <Navbar>
-        <Homepage />
-      </Navbar>
+        <DrawerLayout>
+          <Homepage />
+        </DrawerLayout>
       } />
+
+    <Route path="/profile" element={
+        <DrawerLayout>
+          <Profile/>
+        </DrawerLayout>
+    }/>
+
+    <Route path="/settings" element={
+      <DrawerLayout>
+        <Settings/>
+      </DrawerLayout>      
+    }/>
+    
     </Routes>
   );
 }
