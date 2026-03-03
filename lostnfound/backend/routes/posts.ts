@@ -12,11 +12,12 @@ export interface NewPost {
   type: PostType;
   location: string;
   returnClaimLocation: string;
+  image?: string | null;
 }
 
 // POST /posts — Add a new post
 router.post("/", async (req: Request, res: Response) => {
-  const { title, description, type, location, returnClaimLocation } = req.body;
+  const { title, description, type, location, returnClaimLocation, image } = req.body;
 
   const numericType = Number(type);
 
@@ -41,10 +42,21 @@ router.post("/", async (req: Request, res: Response) => {
     type: numericType, 
     location: location.trim(),
     returnClaimLocation: returnClaimLocation.trim(),
+    image: image ?? null,
     createdAt: FieldValue.serverTimestamp(),
   });
 
   return res.status(201).json({ message: "Post created.", id: docRef.id });
+});
+
+// getting posts for feed
+router.get("/", async (req: Request, res: Response) => {
+    const snapshot = await db.collection("posts").orderBy("createdAt", "desc").get();
+    const posts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
+    return res.status(200).json(posts);
 });
 
 // DELETE /posts/:id — Delete a post
