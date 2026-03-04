@@ -61,11 +61,32 @@ export default function Homepage() {
 
     return (
         <div>
-            <label htmlFor="add-post-modal" className="btn bg-black text-white border-none rounded-lg text-[15px] mb-4">
-                + Add Post
-            </label>
+            <div className="sticky top-0 z-0 bg-white pb-3 flex justify-center mb-5"> 
+                <div className="avatar avatar-placeholder mt-5 mr-3">
+                    <div className="bg-[#f34700] text-white h-12 w-12 rounded-full">
+                        <span>U</span>
+                    </div>
+                </div>
+                <label htmlFor="add-post-modal" className="block cursor-pointer w-200">
+                    <fieldset className="fieldset bg-white shadow-lg p-3 rounded-xl border border-[#f34700] w-full">
+                        <legend className="fieldset-legend text-[#f34700]">Create a post</legend>
+                            
+                            <input
+                                type="text"
+                                className="input h-5 w-full pointer-events-none text-[#3d4451]"
+                                placeholder="What did you lose or find?"
+                                readOnly
+                            />
+                    </fieldset>
+                </label>
+            </div>
+
             <input type="checkbox" id="add-post-modal" className="modal-toggle" />
-            <div className="modal fixed z-[100]">
+            <div className="modal">
+                <label
+                    htmlFor="add-post-modal"
+                    className="modal-overlay absolute bg-black/50 inset-0 cursor-pointer">
+                </label>
                 <div className="modal-box bg-[#f34700] text-white relative border-0 rounded-lg">
                     <label htmlFor="add-post-modal" className="btn btn-sm btn-circle absolute right-2 top-2 text-black text-lg border-none">X</label>
                     <h3 className="text-lg font-bold mb-4">Create New Post</h3>

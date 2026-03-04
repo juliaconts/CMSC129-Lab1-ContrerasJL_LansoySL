@@ -36,19 +36,60 @@ export default function PostsFeed() {
     if (posts.length === 0) return <p>No posts yet.</p>;
 
     return (
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-16">
             {posts.map((post) => (
-                <div key={post.id} style={{ border: "1px solid #ccc", marginBottom: "16px", padding: "12px" }}>
-                    {post.image && (
-                        <img src={post.image} alt={post.title} style={{ width: "100%", maxHeight: "200px", objectFit: "cover" }} />
-                    )}
-                    <p><strong>Type:</strong> {post.type === 1 ? "Lost" : "Found"}</p>
-                    <p><strong>Title:</strong> {post.title}</p>
-                    <p><strong>Description:</strong> {post.description}</p>
-                    <p><strong>Location:</strong> {post.location}</p>
-                    <p><strong>Claim/Return at:</strong> {post.returnClaimLocation}</p>
+            <div
+                key={post.id}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+            >
+                {/* Image */}
+                {post.image && (
+                <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-64 object-cover"
+                />
+                )}
+
+                {/* Content */}
+                <div className="p-5 space-y-3">
+                
+                {/* Status Badge */}
+                <span
+                    className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
+                    post.type === 1
+                        ? "bg-red-100 text-red-600"
+                        : "bg-green-100 text-green-600"
+                    }`}
+                >
+                    {post.type === 1 ? "Lost Item" : "Found Item"}
+                </span>
+
+                {/* Title */}
+                <h2 className="text-xl font-bold text-gray-800">
+                    {post.title}
+                </h2>
+
+                {/* Description */}
+                <p className="text-gray-600 text-sm">
+                    {post.description}
+                </p>
+
+                {/* Location */}
+                <p className="text-sm text-gray-700">
+                    <span className="font-semibold">Location:</span> {post.location}
+                </p>
+
+                {/* Claim */}
+                <p className="text-sm text-gray-700">
+                    <span className="font-semibold">
+                    {post.type === 1 ? "If found:" : "Claim in:"}
+                    </span>{" "}
+                    {post.returnClaimLocation}
+                </p>
                 </div>
+            </div>
             ))}
         </div>
-    );
+);
 }
