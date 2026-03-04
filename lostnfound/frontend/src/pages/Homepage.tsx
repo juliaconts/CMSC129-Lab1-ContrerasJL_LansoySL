@@ -1,6 +1,7 @@
 import { useState } from "react";
 import imageCompression from "browser-image-compression";
 import PostsFeed from "./PostFeed";
+import { auth } from "../firebase";
 
 export default function Homepage() {
     const [title, setTitle] = useState("");
@@ -39,10 +40,17 @@ export default function Homepage() {
         setError("");
         if (!type) { setError("Please select a status (lost or found)."); return; }
         setLoading(true);
+        setLoading(true);
         try {
+            const user = auth.currentUser;
+            if (!user) { setError("You must be logged in to post."); setLoading(false); return; }
+            const token = await user.getIdToken();
             const res = await fetch("http://localhost:3000/posts", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
                 body: JSON.stringify({ title, description, location, returnClaimLocation, type, image: image ?? null }),
             });
             const data = await res.json();

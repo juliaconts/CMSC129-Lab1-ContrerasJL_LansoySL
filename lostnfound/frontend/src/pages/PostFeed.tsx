@@ -47,7 +47,7 @@ export default function PostsFeed() {
                 <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-110 object-cover"
                 />
                 )}
 
@@ -66,22 +66,22 @@ export default function PostsFeed() {
                 </span>
 
                 {/* Title */}
-                <h2 className="text-xl font-bold text-gray-800">
+                <h2 className="text-3xl font-bold text-gray-800">
                     {post.title}
                 </h2>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-m">
                     {post.description}
                 </p>
 
                 {/* Location */}
-                <p className="text-sm text-gray-700">
+                <p className="text-m text-gray-700">
                     <span className="font-semibold">Location:</span> {post.location}
                 </p>
 
                 {/* Claim */}
-                <p className="text-sm text-gray-700">
+                <p className="text-m text-gray-700">
                     <span className="font-semibold">
                     {post.type === 1 ? "If found:" : "Claim in:"}
                     </span>{" "}
