@@ -4,6 +4,7 @@ import PostsFeed from "./PostFeed";
 import { auth } from "../firebase";
 
 export default function Homepage() {
+    const [userEmail] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState("");
@@ -67,12 +68,14 @@ export default function Homepage() {
         }
     };
 
+    const initials = userEmail ? userEmail[0].toUpperCase() : "U";
+
     return (
         <div>
             <div className="sticky top-0 z-0 bg-white pb-3 flex justify-center mb-5"> 
                 <div className="avatar avatar-placeholder mt-5 mr-3">
                     <div className="bg-[#f34700] text-white h-12 w-12 rounded-full">
-                        <span>U</span>
+                        <span>{initials}</span>
                     </div>
                 </div>
                 <label htmlFor="add-post-modal" className="block cursor-pointer w-200">

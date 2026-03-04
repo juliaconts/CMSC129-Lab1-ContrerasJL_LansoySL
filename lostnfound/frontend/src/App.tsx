@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import DeletedPosts from "./pages/DeletedPosts";
 import DrawerLayout from "./components/DrawerLayout";
 
 const App: React.FC = () => {
@@ -29,6 +30,12 @@ const App: React.FC = () => {
           <Profile/>
         </DrawerLayout>
     }/>
+
+    <Route path="/deleted-posts" element={
+      <DrawerLayout>
+        <DeletedPosts/>
+      </DrawerLayout>
+    }></Route>
 
     <Route path="/settings" element={
       <DrawerLayout>

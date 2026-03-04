@@ -50,7 +50,10 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
             </li>
             <li>
               <NavLink 
-                to="/deleted">🗑 Recently Deleted</NavLink>
+                to="/deleted-posts"
+                onClick={() => window.location.assign("/deleted-posts")}>
+                🗑 Recently Deleted
+                </NavLink>
             </li>
             <li>
               <NavLink 
