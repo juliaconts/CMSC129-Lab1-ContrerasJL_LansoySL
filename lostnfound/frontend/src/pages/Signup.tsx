@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FloatingCircles from '../components/FloatingCircles';
 import "./signup.css";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -10,31 +12,36 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleSignup = async () => {
+  const handleSignup = async () => {
         if (password !== confirmPassword) {
             setError("Passwords do not match");
             return;
         }
         try {
+            // create user in Firebase
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const token = await userCredential.user.getIdToken();
+
+            // save user to backend
             const response = await fetch("http://localhost:3000/auth/signup", {
                 method: "POST",
-                headers: {
+                headers: { 
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email }),
             });
-            if (response.ok) {
-                navigate("/homepage");
-            } else {
+
+            if (!response.ok) {
                 const data = await response.json();
-                console.log("Signup error:", data);
                 setError(data.error);
+                return;
             }
+            navigate("/homepage");
         } catch (err: any) {
-            setError("An error occurred");
+            setError(err.message || "An error occurred");
         }
     };
-
     return (
         <div className="flex items-center justify-center min-h-screen bg-base-200">
             <FloatingCircles />
