@@ -21,6 +21,8 @@ A community-driven lost and found platform that helps people recover lost items 
 
 ## Tech Stack
 
+**FERN** (Firebase, Express.js, React.js, Node.js)
+
 **Frontend**
 - React + TypeScript (Vite)
 - Tailwind CSS + DaisyUI
