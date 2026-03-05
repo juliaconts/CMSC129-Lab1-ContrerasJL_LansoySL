@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FloatingCircles from '../components/FloatingCircles';
 import "./signup.css";
 
 export default function Signup() {
@@ -36,6 +37,7 @@ export default function Signup() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-base-200">
+            <FloatingCircles />
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
                 <fieldset className="fieldset">

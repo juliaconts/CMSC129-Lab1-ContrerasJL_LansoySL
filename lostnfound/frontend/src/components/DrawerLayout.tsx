@@ -9,6 +9,7 @@ interface LayoutProps {
 }
 
 const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
+  const [showLogoutConfirm, setShowLogoutConfirm] = React.useState(false);
   return (
     <div className="drawer">
       
@@ -70,25 +71,48 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
           </ul>
 
           {/* Logout */}
-        <div className="p-4 border-t border-neutral-focus">
-            <NavLink
-                to="/logout"
-                className="text-error"
-                onClick={async (e) => {
-                    e.preventDefault();
-                    const confirmed = window.confirm("Are you sure you want to logout?");
-                    if (confirmed) {
-                        await signOut(auth);
-                        window.location.assign("/login");
-                    }
-                }}
+          <div className="p-4 border-t border-neutral-focus">
+            <button
+              className="text-error text-[18px]"
+              onClick={() => setShowLogoutConfirm(true)}
             >
-                🚪 Logout
-            </NavLink>
-        </div>
+              🚪 Logout
+            </button>
+          </div>
 
         </aside>
       </div>
+
+      {/* Logout Confirm Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowLogoutConfirm(false)}
+          />
+          <div className="relative bg-white rounded-2xl shadow-2xl z-10 p-8 max-w-sm mx-4 text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Logout?</h3>
+            <p className="text-gray-500 mb-6 text-sm">Are you sure you want to logout?</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="flex-1 btn bg-gray-100 text-gray-700 border-none hover:bg-gray-200 rounded-xl"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  await signOut(auth);
+                  window.location.assign("/login");
+                }}
+                className="flex-1 btn bg-red-500 text-white border-none hover:bg-red-600 rounded-xl"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

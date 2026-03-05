@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import './login.css';
+import FloatingCircles from '../components/FloatingCircles';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,13 +27,15 @@ export default function Login() {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row gap-50">
+    <div className="hero bg-base-200 min-h-screen relative overflow-hidden">
+      <FloatingCircles />
+      <div className="hero-content flex-col lg:flex-row gap-15 lg:-translate-x-5">
         <div className="text-center lg:text-left">
-          <h1 className="text-secondary text-5xl font-bold">lostnfound </h1>
+          <h1 className="text-[#f34700]" style={ { fontSize: "60px" } }>
+            lostnfound
+          </h1>
           <p className="py-6">
-            Welcome back! Enter your credentials to access the dashboard.
-          </p>
+            One post away from getting it back. lostnfound is your go-to community space for posting lost and found items, making it easier than ever to reconnect people with the things that matter to them.          </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
           <div className="card-body">

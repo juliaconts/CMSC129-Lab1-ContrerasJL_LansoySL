@@ -2,8 +2,21 @@ import { useState } from "react";
 import imageCompression from "browser-image-compression";
 import PostsFeed from "./PostFeed";
 import { auth } from "../firebase";
+import toast from "react-hot-toast";
+
+interface Post {
+    id: string;
+    title: string;
+    description: string;
+    location: string;
+    returnClaimLocation: string;
+    type: 1 | 2;
+    image: string | null;
+}
 
 export default function Homepage() {
+    const [posts, setPosts] = useState<Post[] | null>(null);
+    const [refreshKey, setRefreshKey] = useState(0); // Used to force refresh PostsFeed
     const [userEmail] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -56,7 +69,20 @@ export default function Homepage() {
             });
             const data = await res.json();
             if (!res.ok) { setError(data.error || "Something went wrong."); return; }
-            alert("Successfully posted!");
+            
+            const newPost: Post = { 
+                id: data.id, 
+                title, 
+                description, 
+                location, 
+                returnClaimLocation, 
+                type, 
+                image: image ?? null 
+            };
+            setPosts(prev => prev ? [newPost, ...prev] : [newPost]);
+            setRefreshKey(prev => prev + 1); // Force refresh PostsFeed
+
+            toast.success("Post created successfully!");
             setTitle(""); setDescription(""); setLocation("");
             setReturnClaimLocation(""); setType(null); setImage(null);
             const modal = document.getElementById("add-post-modal") as HTMLInputElement;
@@ -147,7 +173,7 @@ export default function Homepage() {
                     </form>
                 </div>
             </div>
-            <PostsFeed />
+            <PostsFeed posts={posts} onPostsLoaded={setPosts} key={refreshKey} />
         </div>
     );
 }

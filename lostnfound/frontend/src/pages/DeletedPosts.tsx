@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import toast from "react-hot-toast";
 
 interface Post {
   id: string;
@@ -27,6 +28,7 @@ export default function DeletedPosts() {
   const [error, setError] = useState("");
   const [actionId, setActionId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [confirmRestoreId, setConfirmRestoreId] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
@@ -57,10 +59,12 @@ export default function DeletedPosts() {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) { alert("Failed to restore post."); return; }
+      if (!res.ok) { toast.error("Failed to restore post."); return; }
       setPosts((prev) => prev.filter((p) => p.id !== postId));
+      setConfirmRestoreId(null);
+      toast.success("Post restored successfully.");
     } catch {
-      alert("Network error.");
+      toast.error("Network error.");
     } finally {
       setProcessing(false);
     }
@@ -74,11 +78,12 @@ export default function DeletedPosts() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) { alert("Failed to delete post."); return; }
+      if (!res.ok) { toast.error("Failed to delete post."); return; }
       setPosts((prev) => prev.filter((p) => p.id !== postId));
       setConfirmDeleteId(null);
+      toast.success("Post permanently deleted.");
     } catch {
-      alert("Network error.");
+      toast.error("Network error.");
     } finally {
       setProcessing(false);
     }
@@ -172,7 +177,7 @@ export default function DeletedPosts() {
                 {/* Restore / Delete Buttons */}
                 <div className="flex gap-3 pt-1">
                   <button
-                    onClick={() => handleRestore(post.id)}
+                    onClick={() => setConfirmRestoreId(post.id)}
                     disabled={processing}
                     className="flex-1 btn btn-sm bg-[#f34700] text-white border-none hover:bg-orange-600 rounded-xl text-sm font-semibold disabled:opacity-60"
                   >
@@ -211,6 +216,32 @@ export default function DeletedPosts() {
                 className="flex-1 btn bg-red-500 text-white border-none hover:bg-red-600 rounded-xl disabled:opacity-60"
               >
                 {processing ? "Deleting..." : "Delete Forever"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Restore Confirm Modal */}
+      {confirmRestoreId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setConfirmRestoreId(null)} />
+          <div className="relative bg-white rounded-2xl shadow-2xl z-10 p-8 max-w-sm mx-4 text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Restore this post?</h3>
+            <p className="text-gray-500 mb-6 text-sm">The post will be restored to your profile and visible to others again.</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setConfirmRestoreId(null)}
+                className="flex-1 btn bg-gray-100 text-gray-700 border-none hover:bg-gray-200 rounded-xl"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleRestore(confirmRestoreId)}
+                disabled={processing}
+                className="flex-1 btn bg-green-500 text-white border-none hover:bg-green-600 rounded-xl disabled:opacity-60"
+              >
+                {processing ? "Restoring..." : "Restore"}
               </button>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import EditPostModal from "./EditPost";
+import toast from "react-hot-toast";
 
 interface Post {
   id: string;
@@ -54,8 +55,9 @@ export default function ProfilePage() {
       if (!res.ok) { alert("Failed to delete post."); return; }
       setPosts((prev) => prev.filter((p) => p.id !== postId));
       setDeleteConfirmId(null);
+      toast.success("Post deleted successfully.");
     } catch {
-      alert("Network error. Could not delete post.");
+      toast.error("Network error. Could not delete post.");
     } finally {
       setDeleting(false);
     }
@@ -63,6 +65,7 @@ export default function ProfilePage() {
 
   const handleUpdated = (updated: Post) => {
     setPosts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+    toast.success("Post edited successfully.");
   };
 
   const initials = userEmail ? userEmail[0].toUpperCase() : "U";
@@ -98,16 +101,15 @@ export default function ProfilePage() {
 
 
       {/* Posts Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-16 items-start">
         {posts.map((post) => (
           <div
             key={post.id}
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
-            {post.image && (
               <div className="relative w-full h-64 bg-gray-100">
                 <img
-                  src={post.image}
+                  src={post.image || "https://operaparallele.org/wp-content/uploads/2023/09/Placeholder_Image.png"}
                   alt={post.title}
                   className="w-full h-full object-cover"
                 />
@@ -120,7 +122,6 @@ export default function ProfilePage() {
                   {post.type === 1 ? "Lost Item" : "Found Item"}
                 </span>
               </div>
-            )}
 
             {/* Content */}
             <div className="p-6 space-y-4">
