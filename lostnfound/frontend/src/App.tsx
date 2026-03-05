@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import DeletedPosts from "./pages/DeletedPosts";
 import DrawerLayout from "./components/DrawerLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App: React.FC = () => {
   return (
@@ -20,27 +21,35 @@ const App: React.FC = () => {
     <Route path="*" element={<Navigate to="/" replace />} />
 
     <Route path="/homepage" element={
+      <ProtectedRoute>
         <DrawerLayout>
           <Homepage />
         </DrawerLayout>
+      </ProtectedRoute>
       } />
 
     <Route path="/profile" element={
+      <ProtectedRoute>
         <DrawerLayout>
           <Profile/>
         </DrawerLayout>
+        </ProtectedRoute>
     }/>
 
     <Route path="/deleted-posts" element={
+      <ProtectedRoute>
       <DrawerLayout>
         <DeletedPosts/>
       </DrawerLayout>
+      </ProtectedRoute>
     }></Route>
 
     <Route path="/settings" element={
+      <ProtectedRoute>
       <DrawerLayout>
         <Settings/>
-      </DrawerLayout>      
+      </DrawerLayout>  
+      </ProtectedRoute>    
     }/>
     
     </Routes>

@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { NavLink } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -72,11 +74,12 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink
                 to="/logout"
                 className="text-error"
-                onClick={(e) => {
-                    e.preventDefault(); // prevent immediate navigation
+                onClick={async (e) => {
+                    e.preventDefault();
                     const confirmed = window.confirm("Are you sure you want to logout?");
                     if (confirmed) {
-                    window.location.assign("/logout"); // go to logout page
+                        await signOut(auth);
+                        window.location.assign("/login");
                     }
                 }}
             >
