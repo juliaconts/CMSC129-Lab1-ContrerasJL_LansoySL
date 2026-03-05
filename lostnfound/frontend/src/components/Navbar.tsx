@@ -36,7 +36,8 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                 <div className="absolute left-1/2 transform -translate-x-1/2">
                     <NavLink
                         to="/"
-                        className="text-xl font-semibold text-[#f34700]"
+                        className="text-[#f34700]"
+                        style={{ fontSize: "45px", fontFamily: "Nerko One, cursive"}}
                     >
                         lostnfound
                     </NavLink>

@@ -100,7 +100,8 @@ export default function Homepage() {
                 </label>
                 <div className="modal-box bg-[#f34700] text-white relative border-0 rounded-lg">
                     <label htmlFor="add-post-modal" className="btn btn-sm btn-circle absolute right-2 top-2 text-black text-lg border-none">X</label>
-                    <h3 className="text-lg font-bold mb-4">Create New Post</h3>
+                    <h3 className="mb-4"
+                    style={{fontSize: "24px", fontFamily: "Nerko One, cursive"}}>Create New Post</h3>
                     {error && <div className="bg-red-800 text-white text-sm rounded-lg px-3 py-2 mb-3">{error}</div>}
                     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                         <fieldset className="fieldset">

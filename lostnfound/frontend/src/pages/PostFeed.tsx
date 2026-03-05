@@ -56,7 +56,7 @@ export default function PostsFeed() {
                 
                 {/* Status Badge */}
                 <span
-                    className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
+                    className={`inline-block px-3 py-1 text-md font-semibold rounded-full ${
                     post.type === 1
                         ? "bg-red-100 text-red-600"
                         : "bg-green-100 text-green-600"
@@ -66,7 +66,8 @@ export default function PostsFeed() {
                 </span>
 
                 {/* Title */}
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-gray-800"
+                style={{ fontSize: "38px", fontFamily: "Nerko One, cursive" }}>
                     {post.title}
                 </h2>
 

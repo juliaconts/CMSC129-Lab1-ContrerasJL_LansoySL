@@ -26,18 +26,20 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
         <aside className="w-64 min-h-full bg-white text-[#f34700] flex flex-col">
 
           {/* Header */}
-          <div className="p-5 text-2xl font-bold border-b border-neutral-focus">
+          <div className="p-5 text-2xl font-bold border-b border-neutral-focus"
+            style={{ fontSize: "35px", fontFamily: "Nerko One, cursive" }}>
             lostnfound
           </div>
 
           {/* Menu */}
-          <ul className="menu p-4 flex-1 gap-2">
+          <ul className="menu p-4 flex-1 gap-2"
+          style={{fontSize: "18px"}}>
             <li>
                 <NavLink
                     to="/homepage"
                     onClick={() => window.location.assign("/homepage")}
                 >
-                🏠 Home
+                Home
                 </NavLink>
             </li>
             <li>
@@ -45,14 +47,14 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
                     to="/profile"
                     onClick={() => window.location.assign("/profile")}
                 >
-                👤 Profile
+                Profile
                 </NavLink>
             </li>
             <li>
               <NavLink 
                 to="/deleted-posts"
                 onClick={() => window.location.assign("/deleted-posts")}>
-                🗑 Recently Deleted
+                Recently Deleted
                 </NavLink>
             </li>
             <li>
@@ -60,7 +62,7 @@ const DrawerLayout: React.FC<LayoutProps> = ({ children }) => {
                 to="/settings"
                 onClick={() => window.location.assign("/settings")}
                 >
-                ⚙ Settings
+                Settings
                 </NavLink>
             </li>
           </ul>

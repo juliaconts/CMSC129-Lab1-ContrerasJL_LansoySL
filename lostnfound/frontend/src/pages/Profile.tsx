@@ -70,13 +70,13 @@ export default function ProfilePage() {
   return (
     <div>
       {/* Profile Header */}
-      <div className="bg-white border-b border-gray-200 px-8 py-10">
+      <div className="bg-white px-8 py-10">
         <div className="max-w-4xl mx-auto flex items-center gap-6">
           <div className="bg-[#f34700] text-white h-20 w-20 rounded-full flex items-center justify-center text-3xl font-bold shadow-md flex-shrink-0">
             {initials}
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{userEmail}</h1>
+            <h1 className="text-2xl font-bold text-gray-900" style={{"fontFamily": "Nata-Sans, sans-serif"}}>{userEmail}</h1>
             {/* <p className="text-lg font-semibold text-[#f34700] mt-0.5">Your Posts</p> */}
             <p className="text-gray-500 mt-1">
                 {posts.length} {posts.length === 1 ? "post" : "posts"}
@@ -84,7 +84,7 @@ export default function ProfilePage() {
           </div>
            {/* <h2 className="text-xl font-bold text-gray-800 mb-6">My Posts</h2> */}
         </div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">My Posts</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-1 mt-6">My Posts</h2>
       </div>
 
       {/* States */}
@@ -112,9 +112,10 @@ export default function ProfilePage() {
                   className="w-full h-full object-cover"
                 />
                 <span
-                  className={`absolute top-4 left-4 px-3 py-1.5 text-xs font-bold rounded-full tracking-wide shadow ${
+                  className={`absolute top-4 left-4 px-3 py-1.5 text-md font-bold rounded-full tracking-wide shadow ${
                     post.type === 1 ? "bg-red-500 text-white" : "bg-emerald-500 text-white"
                   }`}
+                  
                 >
                   {post.type === 1 ? "Lost Item" : "Found Item"}
                 </span>
@@ -135,7 +136,8 @@ export default function ProfilePage() {
                 </span>
               )}
 
-              <h2 className="text-2xl font-bold text-gray-900 leading-tight">{post.title}</h2>
+              <h2 className="text-2xl font-bold text-gray-900 leading-tight"
+              style={{ fontSize: "38px", fontFamily: "Nerko One, cursive" }}>{post.title}</h2>
               <p className="text-gray-500 text-base leading-relaxed line-clamp-3">{post.description}</p>
 
               <hr className="border-gray-100" />
